@@ -1,0 +1,27 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block body%}
+
+
+<div class="container">
+    <center>
+        <h1 style=" color: white; text-transform:uppercase; margin-top:2% ;margin-bottom: 2%; background-color: coral; padding:1%">Your {{tag}} Product</h1>
+    </center>
+    <div class="row">
+        {% for pro in product %}
+        <div class="col-lg-3">
+            <div class="box-element">
+                <img class="thumbnail" src="{{pro.image.url}}" width="100%" height="26%">
+                <hr> 
+                <h4  style="display: inline-block;"><strong>{{pro.name}}</strong></h4> 
+                <h5  style="display: inline-block; float:right"><strong>₹ {{pro.price}}</strong></h5> 
+                <br>  
+                <button data-product="{{pro.id}}" data-action="add" data-url="{% url 'update_item' %}" class="btn btn-outline-primary add-btn update-cart ">Add to Cart</button>
+                <a href="{% url 'product_detail' pro.slug %}" class="btn btn-outline-success" style="display: inline-block;">View</a>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block css %}
+<!-- <style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: red;
+    }
+
+    body .no-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style> -->
+{% endblock %}
+{% block body %}
+{% load account_extras %}
+
+<!-- {% include 'accounts/navbar.html' %}  -->
+{% for t,value in product.items %}
+<div style="padding-top: 5px;padding-bottom: 5px; margin-bottom: 10px;">
+    <a href="{% url 'more_product' t.id %}"><h3 style="margin: 10px; display:inline-block;"> {{t}}</h3> </a>
+    <hr>
+</div>
+<div style="margin-left:2% ;margin-right:2% ;">
+    <div class="owl-carousel owl-theme">
+        {% for pro in value %}
+        <div class="box-element" style="margin-left:5%;">
+            <img class="thumbnail" src="{{pro.image.url}}" width="100%" height="25%">
+            <hr> 
+            <h4  style="display: inline-block;"><strong>{{pro.name}}</strong></h4>  
+            <br>  
+            <button data-product="{{pro.id}}" data-action="add" data-url="{% url 'update_item' %}" class="btn btn-outline-primary add-btn update-cart ">Add to Cart</button>
+            <a href="{% url 'product_detail' pro.slug %}" class="btn btn-outline-success" style="display: inline-block;">View</a>
+            <h4  style="display: inline-block; float:right"><strong>₹ {{pro.price}}</strong></h4>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+</script>
+{% endblock %}

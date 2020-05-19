@@ -1,0 +1,53 @@
+{% extends 'accounts/base.html' %} {% load static %} {% block body %}
+<br>
+<center>
+    <p style="background-color: rgb(109, 193, 193);padding: 10px; font-size: 30px;color: azure;">CUSTOMER PRODUCT DETAIL
+    </p>
+</center>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <center>
+                <p>Customer Name :- {{order.order.customer}}</p>
+                <hr>
+                <p>Product Name :- {{order.product.name}}</p>
+                <hr>
+                <p>Order Date :- {{order.cr_date | date:"d/m/y"}}</p>
+                <hr>
+                <p>Price :- {{order.product.price}}</p>
+                <hr>
+                <p>Category :- {{order.product.Category}}</p>
+                <hr>
+                <p>Description :- {{order.product.description}}</p>
+                <hr>
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% for f in form %}
+                    {{f.label_tag}}
+                    <br>
+                    {{f}}
+                    <br>
+                    <hr>
+                    {% endfor %}
+                    <input class="btn btn-md btn-info " type="submit" name="Submit">
+                </form>
+            </center>
+
+        </div>
+        <div class="col-lg-6">
+            <center>
+                <h3>Shipping Address</h3>
+            </center>
+            <br>
+            <div style="margin-left:50px;">           
+                <p><strong>Address :-</strong>{{shipping.address}}</p>
+                <p><strong>City :-</strong>{{shipping.city}}</p>
+                <p><strong>State :-</strong>{{shipping.state}}</p>
+                <p><strong>ZipCode :-</strong>{{shipping.zipcode}}</p>
+            </div> 
+        </div>
+    </div>
+</div>
+{% endblock %}

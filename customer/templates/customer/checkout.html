@@ -1,0 +1,81 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="box-element" id="form-wrapper">
+                <!-- <form id="form"> -->
+                    <!-- <div id="user-info">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="name" placeholder="Name..">
+                        </div>
+                        <div class="form-field">
+                            <input required class="form-control" type="email" name="email" placeholder="Email..">
+                        </div>
+                    </div> -->
+                <form method="POST" action="{%url 'shipping' %}">
+                    {% csrf_token%}
+                        <div id="shipping-info">
+                        <!-- <hr> -->
+                        <p>Shipping Information:</p>
+                        <hr>
+                        <div class="form-field">
+                            {{form.address}}
+                        </div>
+                        <div class="form-field">
+                            {{form.city}}
+                        </div>
+                        <div class="form-field">
+                            {{form.state}}    
+                        </div>
+                        <div class="form-field">
+                            {{form.zipcode}}
+                        </div>
+                    </div>
+                    <hr>
+                    <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+                </form>                
+            </div>
+            <br>
+            <div class="box-element invisible " id="payment-info">
+                <small>payment-info</small>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box-element">
+                <a class="btn btn-outline-info" href="{% url 'cart' %}">&#x2190; Back to Cart</a>     
+                <hr>
+                <h3>Order Summary</h3>           
+                <hr>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.product.image.url}}"></div>
+                    <div style="flex:2"><p>{{item.product.name}}</p></div>
+                    <div style="flex:1"><p>{{item.product.price}}</p></div>
+                    <div style="flex:1"><p>x{{item.quantity}}</p></div>
+                </div>
+                {% endfor %}
+                <h5 style="display: inline-block;"> Total Items:   {{order.get_cart_items}}</h5>
+                <h5 class="float-right" style="display: inline-block; margin-right: 10px;">Total:  ₹ {{order.get_cart_total}}</h5>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js%}
+<script>
+    var form = document.getElementById('form');
+    form.addEventListener('submit',function(e){
+        e.preventDefault()
+        console.log('Form Submiting.....');
+        document.getElementById('form-button').classList.add('invisible');
+        document.getElementById('payment-info').classList.remove('invisible');
+
+    })
+</script>
+{% endblock %}

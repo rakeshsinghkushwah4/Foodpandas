@@ -1,0 +1,42 @@
+{% extends 'accounts/base.html' %} {% load static %} {% block body %}
+<br>
+
+<br>
+<div class="container" style="background-color:white;">
+    {% if edit %}
+    <h2 style="text-align: center; color:yellowgreen;padding: 20px;"> EITD YOUR PRODUCT </h2 >
+        <br>
+    <form action="{% url 'edit_product' id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    {% for f in form %}
+   <span style="font-weight: bold;"> {{f.label_tag}} </span>
+    <br>
+        {{f}}
+        <br>
+        <hr>
+    {% endfor %}
+    <input class="btn btn-md btn-info " type="submit" name="Submit">
+    </form>
+    {% else %}
+
+    <h2 style="text-align: center; color:yellowgreen;padding: 20px;"> ADD YOUR PRODUCT </h2 >
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for f in form %}
+    {{f.label_tag}}
+    <br>
+        {{f}}
+        <br>
+        <hr>
+    {% endfor %}
+    <div style="padding-left: 50%;">
+        <input class="btn btn-md btn-info " type="submit" name="Submit">
+
+    </div>
+    
+</form>
+    {% endif %}
+    <br>
+</div>
+{% endblock %}

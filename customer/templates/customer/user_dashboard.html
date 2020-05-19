@@ -1,0 +1,82 @@
+{% extends 'accounts/base.html' %} 
+{% block body %} 
+{% include 'seller/status.html' %}
+<br>
+<div class="text-center">
+    <h1 style="color: darkblue">YOUR PRODUCT</h1>
+<br>
+<hr>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <h3 class="text-center " style="color: rgb(226, 20, 20)">YOUR PANDING PRODUCT</h3><hr>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Quntity</th>
+                    <th>Product Detail</th>
+                    <th>Cancel Order</th>
+                </tr>
+                {% for o in orderitem %}
+                <tr>
+                    <td>{{o.product}}</td>
+                    <td>{{o.product.Category}}</td>
+                    <td>{{o.cr_date | date:"d/m/y"}}</td>
+                    <td>{{o.status}}</td>
+                    <td>{{o.quantity}}</td>
+                    <td> <a class="btn btn-info" href="#">Product Details</a></td>
+                    <td> <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal{{o.id}}">Cancel Order</a></td>
+                </tr>
+                  <!-- The Modal -->
+                     <div class="modal" id="myModal{{o.id}}">
+                        <div class="modal-dialog modal-dialog-centered">
+                             <div class="modal-content">
+                     <!-- Modal Header -->
+                         <div class="modal-header">
+                             <h5>You want cancel order "{{o.product}}"</h5>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                         </div>
+                      <!-- Modal body-->
+                         <div class="modal-body">
+                              <h4>{{o.product.description}}</h4>
+                         </div>
+
+                      <!-- Modal footer -->
+                     <div class="modal-footer">
+                          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                          <button data-url="{% url 'cancel_order' %}" data-id="{{o.id}}" class="btn btn-outline-primary delete-order">Cancel Order</button>
+                     </div>
+                            </div>
+                   </div>
+                </div>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="col-md-5">
+    <h3 class="text-center" style="color: rgb(247, 165, 13)">YOUR DELIVERED PRODUCT</h3><hr>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                </tr>
+                {% for o in d_order %}
+                <tr>
+                    <td>{{o.product}}</td>
+                    <td>{{o.product.Category}}</td>
+                    <td>{{o.cr_date | date:"d/m/y" }}</td>
+                    <td>{{o.status}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock%}

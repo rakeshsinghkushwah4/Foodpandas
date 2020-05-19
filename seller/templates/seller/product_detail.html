@@ -1,0 +1,70 @@
+{% extends 'accounts/base.html' %}
+{% load static%}
+{% load account_extras %}
+{% block body %}
+<hr>
+<div class="row">
+<div class="col-md-6">
+    <div class="mx-5">
+        <img   src="{{product.image.url}}" >
+    </div>
+    
+</div>
+<div class="col-md-6 my-5">   
+    <p style="font-size:large;"><span style="font-size: larger;margin-right: 50px;font-style: italic;font-weight: bold;">Product Name:</span><span style="font-size:x-large;">{{product.name}}</span></p>
+    <p style="font-size:large;"><span style="font-size: larger;margin-right: 50px;font-style: italic;font-weight: bold;">Product Price:</span><span style="font-size:x-large;">{{product.price}}</span></p>
+    <p style="font-size:large;"><span style="font-size: larger;margin-right: 50px;font-style: italic;font-weight: bold;">Product Category:</span><span style="font-size:x-large;">{{product.Category}}</span></p>
+    <p style="font-size:large;"><span style="font-size: larger;margin-right: 50px;font-style: italic;font-weight: bold;">Product Tag:</span><span style="font-size:x-large;">{{product.tag.name}}</span></p>
+    <p style="font-size:large;"><span style="font-size: larger;margin-right: 50px;font-style: italic;font-weight: bold;">Product Description:</span></p>
+    <p><span style="font-size:x-large;margin-left: 150px;">{{product.description}}</span></p>
+   
+    <!-- {% if request.user|has_group:"customer" %}
+    <div id="count">
+        <h2 class="btn btn-info add" id="add" > + </h2>
+        <span id="no_product">1</span>
+        <input type="hidden" id="number_product" value="1">
+        <h2 class="btn btn-warning sub" id="sub" > - </h2>    
+    </div>
+        <a class="btn btn-success" href="" onclick="this.href='/accounts/order_product/{{slug}}/'+document.getElementById('number_product').value">Order</a>
+    {% else %}
+    {% endif %} -->
+</div>
+</div>
+{% endblock %}
+
+<!-- {% block js %}
+<script>
+    $(document).ready(function(){
+        var number=0;
+        $('.add').on('click',function(){
+            var id_res = $(this).attr('id');
+            var id = id_res.split("_")[1];
+            var no_product = $("#number_product").val();
+            no_product = parseInt(no_product);
+            no_product = no_product+1;
+            $("#no_product").text(no_product);
+            $("#number_product").val(no_product);
+            console.log('product',no_product);
+
+            // num = num+1
+            // console.log(num)
+            // console.log("nam",typeof(num))
+            // console.log('rakesh',res)    
+        //    number=$('#no_product').val()
+        //    number += 1
+        //    console.log(number)
+        //    $('#no_product').val(number)
+        });
+        $('.sub').on('click',function(){
+            var no_product = $("#number_product").val();
+            no_product = parseInt(no_product);
+            if(no_product>1){
+                no_product = no_product-1;
+                $('#no_product').text(no_product);
+                $("#number_product").val(no_product);
+            }
+        });
+
+    });
+    </script>
+{% endblock %} -->

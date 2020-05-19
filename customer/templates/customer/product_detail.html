@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html'%}
+{% load static %}
+
+{% block body %}
+<br>
+<div class="box-element">   
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{{product_detail.image.url}}" alt="Product Image" >
+        </div>
+        <div class="col-lg-6">
+            <br>
+            <p class="product-style">Name <span>-></span><span style="font-size:x-large;"> {{product_detail.name}}</span></p>
+            <p class="product-style">Price <span>-></span><span style="font-size:x-large;"> {{product_detail.price}}</span></p>
+            <p  class="product-style">Product Category <span>-></span></span><span style="font-size:x-large;"> {{product_detail.Category}}</span></p>
+            <p  class="product-style">Product Category <span>-></span></span><span style="font-size:x-large;"> {{product_detail.description}}</span></p>
+
+            <button data-product="{{product_detail.id}}" data-action="add" data-url="{% url 'update_item' %}" class="btn btn-outline-primary add-btn update-cart ">Add to Cart</button>
+
+        
+
+        </div>       
+    </div>
+</div>
+{% endblock %}

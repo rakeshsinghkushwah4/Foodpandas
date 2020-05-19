@@ -1,0 +1,68 @@
+{% extends 'accounts/base.html' %} {% block body %}
+<br>
+<hr>
+<div class="row">
+    <div class="col-md text-white">
+        <div class="card card-body" style="background-color:darkslateblue;">
+            <h5 class="card-title text-center">Customer</h5>
+            <hr>
+            <a class="btn btn-outline-info btn-sm btn-block" href="#"> Update Customer</a>
+            <a class="btn btn-outline-success btn-sm btn-block" href="#"> Place Order </a>
+        </div>
+    </div>
+    <div class="col-md text-white">
+        <div class="card card-body " style="background-color: grey;">
+            <h5 class="card-title text-center">Contact Information</h5>
+            <hr>
+            <p>Name:       {{customer.name}} </p>
+            <p>Phone:      {{customer.phone}} </p>
+        </div>
+    </div>
+    <div class="col-md  text-white" >
+        <div class="card card-body" style="background-color: blue">
+            <h5 class="card-title text-center">Total Ouders</h5>
+            <hr>
+            <h1 class="card-title text-center">{{total_order}}</h1>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body" style="background-color: rgb(255, 255, 170);">
+            <form id="search" action="{% url 'search' customer.id %}" method="POST">
+                {% csrf_token %}
+                {{search_form}}
+                <button class="btn btn-primary mx-5" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body" id="search_p">
+            <table class="table table-sm" id="product_d">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+                {% for o in order %}
+                {% for i in o %}
+                <tr>
+                    <td>{{i.product.name}}</td>
+                    <td>{{i.product.Category}}</td>
+                    <td>{{i.cr_date}}</td>
+                    <td>{{i.status}}</td>
+                    <td><a class="btn btn-info" href="{% url 'update_order' i.id %}">Update</a></td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
